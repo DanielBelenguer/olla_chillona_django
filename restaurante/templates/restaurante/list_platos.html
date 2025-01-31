@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todas las tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor_todos_platos">
+        <h1>Todos los platos:</h1>
+        {% if platos_list %}
+    <ul>
+    {% for plato in platos_list %}
+        <li><a href="/restaurante/{{ plato.id }}/">{{ plato.nombre }} {{ plato.precio }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay platos</p>
+    {% endif %}
+    </div>
+    
+</body>
+</html>
