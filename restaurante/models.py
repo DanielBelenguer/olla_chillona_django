@@ -1,6 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
+class UsuarioPersonalizado(AbstractUser):
+    CLIENTE = 'cliente'
+    CAMARERO = 'camarero'
+    COCINERO = 'cocinero'
+    JEFE = 'jefe'
+    ROLES = [
+        (CLIENTE, 'cliente'),
+        (CAMARERO, 'camarero'),
+        (COCINERO, 'cocinero'),
+        (JEFE, 'jefe')
+    ]
+    rol = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
+
+
 
 class Plato(models.Model):
     nombre = models.CharField(max_length=50)
@@ -8,12 +23,5 @@ class Plato(models.Model):
     categoria = models.CharField(max_length=50)
     precio = models.DecimalField(max_digits=5, decimal_places=2)
 
-class Cliente(models.Model):
-    nombre = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=10)
-    saldo = models.DecimalField(max_digits=5, decimal_places=2)
-
-class Camarero(models.Model):
-    nombre = models.CharField(max_length=50)
 
 

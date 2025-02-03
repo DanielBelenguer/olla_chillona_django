@@ -51,6 +51,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'olla_chillona_django.urls'
+AUTH_USER_MODEL = 'restaurante.UsuarioPersonalizado'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
 
 TEMPLATES = [
     {

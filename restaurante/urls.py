@@ -3,9 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("list_platos/", view=index, name="list_platos")
+    path("", views.login_view, name="login"),
+    path("registro/", views.register_view, name="register_view"),
+    path("dashboard/", views.dashboard, name="dashboard"),
 ]
-
-""" path("<int:plato_id>/", views.detail, name="detail"),
-    path("add_plato/", views.create, name="add_plato") """
