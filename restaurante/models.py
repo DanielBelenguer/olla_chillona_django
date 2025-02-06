@@ -13,6 +13,12 @@ class UsuarioPersonalizado(AbstractUser):
         (COCINERO, 'cocinero'),
         (JEFE, 'jefe')
     ]
+    usuario = models.CharField(max_length=15)
+    nombre = models.CharField(max_length=25)
+    apellidos = models.CharField(max_length=50)
+    num_telefono = models.IntegerField()
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
     rol = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
 
 

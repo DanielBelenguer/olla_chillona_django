@@ -29,10 +29,13 @@ def dashboard(request):
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
+        nombre = request.POST['nombre']
+        apellidos = request.POST['apellidos']
+        num_telefono = request.POST['num_telefono']
         email = request.POST['email']
         password = make_password(request.POST['password'])
         rol = request.POST['rol']
-        user = UsuarioPersonalizado.objects.create(username=username, email=email, password=password, rol=rol)
+        user = UsuarioPersonalizado.objects.create(username=username, nombre=nombre, apellidos=apellidos, num_telefono=num_telefono, email=email, password=password, rol=rol)
         login(request, user)
         return redirect('dashboard')
     return render(request, 'restaurante/registro.html')
