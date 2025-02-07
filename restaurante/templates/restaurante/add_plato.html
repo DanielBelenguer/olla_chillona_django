@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario para crear platos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
-<body>
-    <form action="****" method="post">
-
-        <label for="titulo">Nombre del plato:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="titulo">Categoría:</label>
-        <input type="text" id="categoria" name="categoria" required>
-
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-
-
-        <label for="titulo">Precio:</label>
-        <input type="text" id="precio" name="precio" required>
-
-        <button type="submit">Crear Plato</button>
-    </form>
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <h2>Vamos a añadir un plato</h2>
+            <input type="text" placeholder="Nombre del plato" id="nombre" name="nombre" required>
+            <input type="text" placeholder="Categoria del plato" id="categoria" name="categoria" required>
+            <textarea id="descripcion" placeholder="Descripción" name="descripcion" rows="4" required></textarea>
+            <input type="text" placeholder="Precio" id="precio" name="precio" required>
+            <button type="submit">Crear Plato</button>
+        </form>
+    </div>
+    
 </body>
 </html>

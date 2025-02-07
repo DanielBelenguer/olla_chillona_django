@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import UsuarioPersonalizado
+from .models import UsuarioPersonalizado,Plato
 from django.contrib.auth.hashers import make_password
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -24,7 +25,11 @@ def logout_view(request):
 def dashboard(request):
     if request.user.rol == 'jefe':
         return render(request, 'restaurante/dashboard_jefe.html')
-    return render(request, 'restaurante/dashboard_empleado.html')
+    if request.user.rol == 'cocinero':
+        return render(request, 'restaurante/dashboard_cocinero.html')
+    if request.user.rol == 'camarero':
+        return render(request, 'restaurante/dashboard_camarero.html')
+    return render(request, 'restaurante/dashboard_cliente.html')
 
 def register_view(request):
     if request.method == 'POST':
@@ -39,3 +44,16 @@ def register_view(request):
         login(request, user)
         return redirect('dashboard')
     return render(request, 'restaurante/registro.html')
+
+def list_platos(request):
+    plato = Plato.objects.all()
+    return render(request, "restaurante/list_platos.html", {"platos": plato})
+
+def add_plato(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        categoria = request.POST['categoria']
+        descripcion = request.POST['descripcion']
+        precio = request.POST['precio']
+        plato = Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio, plato=plato)
+    return render(request, "restaurante/add_plato.html")

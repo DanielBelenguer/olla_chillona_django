@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario para crear tareas</title>
+    <title>Login de la olla chillona</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
-<body>
-    <form method="post">
-        <h2>Iniciar sesión</h2>
-        {% csrf_token %}
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="username" name="nombre">
-
-        <label for="pass">Contraseña:</label>
-        <input type="password" id="password" name="password">
-
-        <button id="ingresa" type="submit">Ingresar</button>
-        <button id="registro"><a href="{% url 'register_view'%}">Registrate</a></button>
-
-    </form>
-    {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
-    </body>
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div style="width: 40%;">
+        <form method="post">
+            <h2>Iniciar sesión</h2>
+            {% csrf_token %}
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="username" name="username">
+    
+            <label for="pass">Contraseña:</label>
+            <input type="password" id="password" name="password">
+    
+            <button id="ingresa" type="submit">Ingresar</button>
+            <button id="registro"><a style="color: white; text-decoration: none;" href="{% url 'register_view'%}">Registrate</a></button>
+    
+        </form>
+        {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+    </div>
+</body>
 </html>
