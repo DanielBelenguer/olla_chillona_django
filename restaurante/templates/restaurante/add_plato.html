@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
-    <div>
+    <div style="width: 40%;">
         <form method="post">
             {% csrf_token %}
             <h2>Vamos a añadir un plato</h2>
             <input type="text" placeholder="Nombre del plato" id="nombre" name="nombre" required>
-            <input type="text" placeholder="Categoria del plato" id="categoria" name="categoria" required>
+            <label for="categoria">Categoría</label>
+            <select name="categoria">
+                <option value="carne">Carne</option>
+                <option value="pescado">Pescado</option>
+                <option value="vegano">Vegano</option>
+                <option value="pizzas">Pizzas</option>
+            </select>
             <textarea id="descripcion" placeholder="Descripción" name="descripcion" rows="4" required></textarea>
             <input type="text" placeholder="Precio" id="precio" name="precio" required>
             <button type="submit">Crear Plato</button>
