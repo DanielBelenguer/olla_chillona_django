@@ -7,5 +7,8 @@ urlpatterns = [
     path("registro/", views.register_view, name="register_view"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path ("list_platos/" , views.list_platos, name="list_platos"),
-    path("add_plato/", views.add_plato, name="add_plato")
+    path("add_plato/", views.add_plato, name="add_plato"),
+    path("<int:plato_id>/", views.detail, name="detail"),
+    path("edita_plato/", views.edita_plato, name="edita_plato"),
+
 ]

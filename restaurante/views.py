@@ -51,9 +51,23 @@ def list_platos(request):
 
 def add_plato(request):
     if request.method == 'POST':
-        nombre = request.POST['nombre']
-        categoria = request.POST['categoria']
-        descripcion = request.POST['descripcion']
-        precio = request.POST['precio']
-        plato = Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio, plato=plato)
+        nombre = request.POST.get('nombre')
+        categoria = request.POST.get('categoria')
+        descripcion = request.POST.get('descripcion')
+        precio = request.POST.get('precio')
+        Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio)
     return render(request, "restaurante/add_plato.html")
+
+    
+def detail(request, plato_id):
+    plato = Plato.objects.get(id=plato_id)
+    return render(request, "restaurante/detail.html", {"plato": plato})
+
+def edita_plato(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        categoria = request.POST.get('categoria')
+        descripcion = request.POST.get('descripcion')
+        precio = request.POST.get('precio')
+        Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio)
+    return render(request, "restaurante/editar_plato.html")

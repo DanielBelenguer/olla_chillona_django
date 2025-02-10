@@ -9,10 +9,10 @@
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div class="contenedor_todos_platos" style="width: 40%;">
         <h1>Todos los platos:</h1>
-        {% if platos_list %}
+        {% if platos %}
     <ul>
-    {% for plato in platos_list %}
-        <li><a href="/restaurante/{{ plato.id }}/">{{ plato.nombre }} {{ plato.precio }}</a></li>
+    {% for plato in platos %}
+        <li><a href="/restaurante/{{ plato.id }}/">{{ plato.nombre }}</a></li>
     {% endfor %}
     </ul>
     {% else %}

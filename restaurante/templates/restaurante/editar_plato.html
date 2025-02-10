@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario para crear platos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div style="width: 40%;">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Vamos a añadir un plato</h2>
+            <input type="text" placeholder="Nombre del plato" id="nombre" name="nombre" value="{{plato.nombre}}" required>
+            <label for="categoria">Categoría</label>
+            <select name="categoria">
+                <option value="carne" {% if plato.categoria == "carne" %}selected{% endif %}>Carne</option>
+                <option value="pescado" {% if plato.categoria == "pescado" %}selected{% endif %}>Pescado</option>
+                <option value="vegetariano" {% if plato.categoria == "vegetariano" %}selected{% endif %}>Vegetariano</option>
+                <option value="pizzas" {% if plato.categoria == "pizzas" %}selected{% endif %}>Pizzas</option>
+            </select>
+            <textarea id="descripcion" placeholder="Descripción" name="descripcion"  rows="4" aria-valuetext="{{plato.descripcion}}" required></textarea>
+            <input type="text" placeholder="Precio" id="precio" name="precio" value="{{plato.precio}}" required>
+            <button type="submit">Crear Plato</button>
+        </form>
+    </div>
+</body>
+</html>

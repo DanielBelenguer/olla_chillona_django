@@ -24,9 +24,19 @@ class UsuarioPersonalizado(AbstractUser):
 
 
 class Plato(models.Model):
+    CARNE = 'carne'
+    PESCADO = 'pescado'
+    VEGETARIANO = 'vegetariano'
+    PIZZA = 'pizza'
+    CATEGORIA = [
+        (CARNE, 'carne'),
+        (PESCADO, 'pescado'),
+        (VEGETARIANO, 'vegetariano'),
+        (PIZZA, 'pizza')
+    ]
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    categoria = models.CharField(max_length=50)
+    categoria = models.CharField(max_length=50, choices=CATEGORIA)
     precio = models.DecimalField(max_digits=5, decimal_places=2)
 
 
