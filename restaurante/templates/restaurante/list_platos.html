@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar los platos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div class="contenedor_todos_platos" style="width: 40%;">
         <h1>Todos los platos:</h1>
+        <div style="display: flex; justify-content: center;">
+            <span class="material-symbols-outlined">mode_night</span>
+                <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
+            <span class="material-symbols-outlined">light_mode</span>
+        </div>
         {% if platos %}
     <ul>
     {% for plato in platos %}
