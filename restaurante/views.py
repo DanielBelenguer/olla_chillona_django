@@ -63,11 +63,13 @@ def detail(request, plato_id):
     plato = Plato.objects.get(id=plato_id)
     return render(request, "restaurante/detail.html", {"plato": plato})
 
-def edita_plato(request):
+def edita_plato(request, plato_id):
+    plato = Plato.objects.get(id=plato_id)
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        categoria = request.POST.get('categoria')
-        descripcion = request.POST.get('descripcion')
-        precio = request.POST.get('precio')
-        Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio)
-    return render(request, "restaurante/editar_plato.html")
+        plato.nombre = request.POST.get('nombre')
+        plato.categoria = request.POST.get('categoria')
+        plato.descripcion = request.POST.get('descripcion')
+        plato.precio = request.POST.get('precio')
+        plato.save()
+        return redirect('detail', plato_id=plato.id)
+    return render(request, "restaurante/editar_plato.html", {"plato": plato})

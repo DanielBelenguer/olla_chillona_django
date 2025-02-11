@@ -6,6 +6,7 @@
     <title>Dashboard del Jefe</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    {% load static %}
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
@@ -16,5 +17,6 @@
             <span class="material-symbols-outlined">light_mode</span>
         </div>
     </div>
+    <script src="{% static 'restaurante/app.js' %}"></script>
 </body>
 </html>
