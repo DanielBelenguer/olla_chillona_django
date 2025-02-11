@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import UsuarioPersonalizado,Plato
+from .models import UsuarioPersonalizado,Plato,Descuento
 from django.contrib.auth.hashers import make_password
 
 
@@ -73,3 +73,10 @@ def edita_plato(request, plato_id):
         plato.save()
         return redirect('detail', plato_id=plato.id)
     return render(request, "restaurante/editar_plato.html", {"plato": plato})
+
+def crear_descuento(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        porcentaje = request.POST.get('porcernaje')
+        Descuento.objects.create(nombre=nombre, porcentaje=porcentaje)
+    return render(request, "restaurante/crear_descuento.html")

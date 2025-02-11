@@ -10,5 +10,5 @@ urlpatterns = [
     path("add_plato/", views.add_plato, name="add_plato"),
     path("<int:plato_id>/", views.detail, name="detail"),
     path("edita_plato/<int:plato_id>/", views.edita_plato, name="edita_plato"),
-
+    path("crear_descuento/", views.crear_descuento, name="crear_descuento"),
 ]
