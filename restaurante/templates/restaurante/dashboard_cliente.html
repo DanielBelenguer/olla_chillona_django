@@ -16,6 +16,24 @@
                 <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
             <span class="material-symbols-outlined">light_mode</span>
         </div>
+        <form action="">
+            <h3>Haz una reserva</h3>
+            <label for="fecha">Fecha de la reserva:</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <label for="hora">Hora de la reserva:</label>
+            <input type="time" id="hora" name="hora" required>
+            <label for="comensales">Número de comensales:</label>
+            <input type="number" id="comensales" name="comensales" required>
+            <button type="submit">Reservar</button>
+        </form>
+
+        <div style="margin-top: 20px;">
+            <h3>Reservas</h3>
+            <ul id="reservas">
+                <!-- Aquí se insertarán las reservas -->
+            </ul>
+        </div>
+
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
 </body>
