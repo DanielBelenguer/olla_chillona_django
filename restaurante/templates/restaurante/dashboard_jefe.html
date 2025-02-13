@@ -20,7 +20,7 @@
         {% if l_descuentos %}
         <ul>
         {% for descuento in l_descuentos %}
-        <li>{{ descuento.nombre }}</li>
+        <li>{{ descuento.nombre }}: {{ descuento.porcent }}</li>
         {% endfor %}
         </ul>
         {% else %}

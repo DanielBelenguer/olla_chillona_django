@@ -23,8 +23,9 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
+    contexto = {"l_descuentos":Descuento.objects.all()}
     if request.user.rol == 'jefe':
-        return render(request, 'restaurante/dashboard_jefe.html')
+        return render(request, 'restaurante/dashboard_jefe.html',contexto)
     if request.user.rol == 'cocinero':
         return render(request, 'restaurante/dashboard_cocinero.html')
     if request.user.rol == 'camarero':
@@ -61,8 +62,8 @@ def add_plato(request):
 
     
 def detail(request, plato_id):
-    l_platos = Plato.objects.get(id=plato_id)
-    return render(request, "restaurante/detail.html", {"l_platos": l_platos})
+    plato = Plato.objects.get(id=plato_id)
+    return render(request, "restaurante/detail.html", {"plato": plato})
 
 def edita_plato(request, plato_id):
     plato = Plato.objects.get(id=plato_id)
@@ -80,9 +81,10 @@ def add_descuento(request):
         nombre = request.POST.get('nombre')
         porcent = request.POST.get('porcent')
         Descuento.objects.create(nombre=nombre, porcent=porcent)
-        return redirect('dashboard')
+        l_descuentos = Descuento.objects.all()
+        return render(request, "restaurante/dashboard_jefe.html", {"l_descuentos": l_descuentos})
     return render(request, "restaurante/add_descuento.html")
 
 def list_descuento(request):
     l_descuentos = Descuento.objects.all()
-    return render(request, "restaurante/dashboard_jefe.html", {"descuentos": l_descuentos})
+    return render(request, "restaurante/dashboard_jefe.html", {"l_descuentos": l_descuentos})

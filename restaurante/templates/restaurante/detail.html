@@ -21,7 +21,7 @@
             <p>Categoría: {{ plato.categoria }}</p>
             <p>Precio: {{ plato.precio }}</p>
         {% else %}
-            <p>No hay platos disponibles.</p>
+            <p>No hay plato disponibles.</p>
         {% endif %}
         <button id="editarplato" class=""><a style="color: white; text-decoration: none;" href="{% url 'edita_plato' plato.id %}">Editar plato</a></button>
     </div>
