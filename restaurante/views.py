@@ -46,8 +46,8 @@ def register_view(request):
     return render(request, 'restaurante/registro.html')
 
 def list_platos(request):
-    plato = Plato.objects.all()
-    return render(request, "restaurante/list_platos.html", {"platos": plato})
+    l_platos = Plato.objects.all()
+    return render(request, "restaurante/list_platos.html", {"l_platos": l_platos})
 
 def add_plato(request):
     if request.method == 'POST':
@@ -56,12 +56,13 @@ def add_plato(request):
         descripcion = request.POST.get('descripcion')
         precio = request.POST.get('precio')
         Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio)
+        return redirect('dashboard')
     return render(request, "restaurante/add_plato.html")
 
     
 def detail(request, plato_id):
-    plato = Plato.objects.get(id=plato_id)
-    return render(request, "restaurante/detail.html", {"plato": plato})
+    l_platos = Plato.objects.get(id=plato_id)
+    return render(request, "restaurante/detail.html", {"l_platos": l_platos})
 
 def edita_plato(request, plato_id):
     plato = Plato.objects.get(id=plato_id)
@@ -72,11 +73,16 @@ def edita_plato(request, plato_id):
         plato.precio = request.POST.get('precio')
         plato.save()
         return redirect('detail', plato_id=plato.id)
-    return render(request, "restaurante/editar_plato.html", {"plato": plato})
+    return render(request, "restaurante/edita_plato.html", {"plato": plato})
 
-def crear_descuento(request):
+def add_descuento(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
-        porcentaje = request.POST.get('porcernaje')
-        Descuento.objects.create(nombre=nombre, porcentaje=porcentaje)
-    return render(request, "restaurante/crear_descuento.html")
+        porcent = request.POST.get('porcent')
+        Descuento.objects.create(nombre=nombre, porcent=porcent)
+        return redirect('dashboard')
+    return render(request, "restaurante/add_descuento.html")
+
+def list_descuento(request):
+    l_descuentos = Descuento.objects.all()
+    return render(request, "restaurante/dashboard_jefe.html", {"descuentos": l_descuentos})

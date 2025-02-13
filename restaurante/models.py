@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-
 class UsuarioPersonalizado(AbstractUser):
     CLIENTE = 'cliente'
     CAMARERO = 'camarero'
@@ -20,7 +19,6 @@ class UsuarioPersonalizado(AbstractUser):
     email = models.EmailField()
     password = models.CharField(max_length=50)
     rol = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
-
 
 
 class Plato(models.Model):
@@ -42,4 +40,4 @@ class Plato(models.Model):
 
 class Descuento(models.Model):
     nombre = models.CharField(max_length=50)
-    porcentaje = models.DecimalField(max_digits=5, decimal_places=2, default=0)    
+    porcent = models.IntegerField(default=0)    

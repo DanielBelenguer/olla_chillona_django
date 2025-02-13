@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del plato ({{plato.nombre}})</title>
+    <title>Detalles del plato ({{ plato.nombre }})</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
     {% load static %}
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
-    <div class="contenedor_todos_platos" style="width: 40%;" >
+    <div class="contenedor_todos_platos" style="width: 40%;">
         <div style="display: flex; justify-content: center;">
             <span class="material-symbols-outlined">mode_night</span>
                 <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
             <span class="material-symbols-outlined">light_mode</span>
         </div>
         {% if plato %}
-            <h2>Nombre: {{plato.nombre}}</h2>
-            <p>Descripción: {{plato.descripcion}}</p>
-            <p>Categoría: {{plato.categoria}}</p>
-            <p>Precio: {{plato.precio}}</p>
-        {% else %}  
+            <h2>Nombre: {{ plato.nombre }}</h2>
+            <p>Descripción: {{ plato.descripcion }}</p>
+            <p>Categoría: {{ plato.categoria }}</p>
+            <p>Precio: {{ plato.precio }}</p>
+        {% else %}
             <p>No hay platos disponibles.</p>
         {% endif %}
         <button id="editarplato" class=""><a style="color: white; text-decoration: none;" href="{% url 'edita_plato' plato.id %}">Editar plato</a></button>

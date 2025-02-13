@@ -16,9 +16,9 @@
                 <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
             <span class="material-symbols-outlined">light_mode</span>
         </div>
-        {% if platos %}
+        {% if l_platos %}
     <ul>
-    {% for plato in platos %}
+    {% for plato in l_platos %}
         <li><a href="/restaurante/{{ plato.id }}/">{{ plato.nombre }}</a></li>
     {% endfor %}
     </ul>

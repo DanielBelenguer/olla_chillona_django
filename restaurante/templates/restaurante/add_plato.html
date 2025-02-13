@@ -10,7 +10,7 @@
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
-        <form method="post">
+        <form action="{% url 'add_plato' %}" method="POST">
             {% csrf_token %}
             <h2>Vamos a añadir un plato</h2>
             <div style="display: flex; justify-content: center;">
@@ -27,11 +27,12 @@
                 <option value="carne">Carne</option>
                 <option value="pescado">Pescado</option>
                 <option value="vegetariano">Vegetariano</option>
-                <option value="pizzas">Pizzas</option>
+                <option value="pizza">Pizza</option>
             </select>
             <textarea id="descripcion" placeholder="Descripción" name="descripcion" rows="4" required></textarea>
             <input type="text" placeholder="Precio" id="precio" name="precio" required>
             <button type="submit">Crear Plato</button>
+
         </form>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
