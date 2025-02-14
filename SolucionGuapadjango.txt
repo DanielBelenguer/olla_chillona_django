@@ -7,3 +7,10 @@
 5 - python manage.py makemigrations [miapp]
 6 - python manage.py makemigrations 
 7 - python manage.py migrate
+
+
+Para ver si hay algo dentro de la base de datos 
+Dentro del directorio donde esta manage.pyc
+1 - Escribe python manage.py shell
+2 - from restaurante.models import [Tu modelo]
+3 - [nombre del modelo].object.all()

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import UsuarioPersonalizado,Plato,Descuento
+from .models import UsuarioPersonalizado,Plato,Descuento,Reserva
 from django.contrib.auth.hashers import make_password
 
 
@@ -23,14 +23,13 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    contexto = {"l_descuentos":Descuento.objects.all()}
     if request.user.rol == 'jefe':
-        return render(request, 'restaurante/dashboard_jefe.html',contexto)
+        return render(request, 'restaurante/dashboard_jefe.html',{"l_descuentos":Descuento.objects.all()})
     if request.user.rol == 'cocinero':
         return render(request, 'restaurante/dashboard_cocinero.html')
     if request.user.rol == 'camarero':
         return render(request, 'restaurante/dashboard_camarero.html')
-    return render(request, 'restaurante/dashboard_cliente.html')
+    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": Reserva.objects.all()})
 
 def register_view(request):
     if request.method == 'POST':
@@ -88,3 +87,17 @@ def add_descuento(request):
 def list_descuento(request):
     l_descuentos = Descuento.objects.all()
     return render(request, "restaurante/dashboard_jefe.html", {"l_descuentos": l_descuentos})
+
+def add_reserva(request):
+    if request.method == 'POST':
+        fecha = request.POST.get('fecha')
+        hora = request.POST.get('hora')
+        comensales = request.POST.get('comensales')
+        Reserva.objects.create(fecha=fecha, hora=hora, num_personas=comensales, usuario=request.user)
+
+        return redirect('dashboard')
+    return render(request, "restaurante/add_reserva.html")
+
+def list_reserva(request):
+    l_reservas = Reserva.objects.all()
+    return render(request, "restaurante/dashboard_cliente.html", {"l_reservas": l_reservas})

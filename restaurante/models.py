@@ -40,4 +40,10 @@ class Plato(models.Model):
 
 class Descuento(models.Model):
     nombre = models.CharField(max_length=50)
-    porcent = models.IntegerField(default=0)    
+    porcent = models.IntegerField(default=0)
+
+class Reserva(models.Model):
+    fecha = models.DateField()
+    hora = models.TimeField()
+    num_personas = models.IntegerField()
+    usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)

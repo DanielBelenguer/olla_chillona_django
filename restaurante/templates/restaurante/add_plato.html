@@ -10,7 +10,7 @@
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
-        <form action="{% url 'add_plato' %}" method="POST">
+        <form method="POST">
             {% csrf_token %}
             <h2>Vamos a añadir un plato</h2>
             <div style="display: flex; justify-content: center;">
