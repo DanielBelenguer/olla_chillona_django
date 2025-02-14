@@ -101,3 +101,10 @@ def add_reserva(request):
 def list_reserva(request):
     l_reservas = Reserva.objects.all()
     return render(request, "restaurante/dashboard_cliente.html", {"l_reservas": l_reservas})
+
+def add_saldo(request):
+    if request.method == 'POST':
+        saldo = request.POST.get('saldo')
+        request.user.saldo += saldo
+        request.user.save()
+        return redirect('dashboard')

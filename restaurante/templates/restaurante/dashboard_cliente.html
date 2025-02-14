@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard del cliente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     {% load static %}
 </head>
+
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
         <h2>Esto es el dashboard del cliente.</h2>
         <div style="display: flex; justify-content: center;">
             <span class="material-symbols-outlined">mode_night</span>
-                <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
+            <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
             <span class="material-symbols-outlined">light_mode</span>
         </div>
         <form action="{% url 'add_reserva' %}" method="POST">
@@ -32,16 +34,23 @@
             <h3>Reservas</h3>
             {% if l_reservas %}
             <ul>
-            {% for reserva in l_reservas %}
-            <li> Fecha de la reserva: {{ reserva.fecha }} Hora: {{ reserva.hora }} Comensales: {{ reserva.num_personas }}</li><!-- reserva.usuario.username -->
-            {% endfor %}
+                {% for reserva in l_reservas %}
+                <li> Fecha de la reserva: {{ reserva.fecha }} Hora: {{ reserva.hora }} Comensales: {{
+                    reserva.num_personas }}</li>
+                {% endfor %}
             </ul>
             {% else %}
             <p>No hay Reservas</p>
             {% endif %}
         </div>
 
+        <p>{% reserva.usuario.saldo %}</p>
+        <button id="introducirsaldo"><a style="color: white; text-decoration: none;"
+                href="{% url 'add_saldo'%}">Introducir saldo</a></button>
+
+
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
 </body>
+
 </html>

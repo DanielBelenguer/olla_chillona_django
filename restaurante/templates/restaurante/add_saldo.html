@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario para crear platos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    {% load static %}
+</head>
+
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div style="width: 40%;">
+        <form action="{% url 'add_descuento' %}" method="POST">
+            {% csrf_token %}
+            <h2>Vamos a añadir Saldo a tu cuenta</h2>
+            <div style="display: flex; justify-content: center;">
+                <span class="material-symbols-outlined">mode_night</span>
+                <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
+                <span class="material-symbols-outlined">light_mode</span>
+            </div>
+            <br>
+            <br>
+            <input type="number" placeholder="Introduce la tarjeta" id="tarjeta" name="tarjeta" required>
+            <input type="number" placeholder="Introduce la cantidad de saldo" id="saldo" name="saldo" required>
+            <button type="submit">Introducir saldo</button>
+            <div>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'restaurante/app.js' %}"></script>
+</body>
+
+</html>
