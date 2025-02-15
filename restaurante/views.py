@@ -29,7 +29,7 @@ def dashboard(request):
         return render(request, 'restaurante/dashboard_cocinero.html')
     if request.user.rol == 'camarero':
         return render(request, 'restaurante/dashboard_camarero.html')
-    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": Reserva.objects.all()})
+    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": Reserva.objects.all(), "saldo": request.user.saldo})
 
 def register_view(request):
     if request.method == 'POST':
