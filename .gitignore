@@ -2,8 +2,8 @@
 *.log
 *.pot
 *.pyc
-restaurante/__pycache__/*
-restaurante/migrations/*
+restaurante/__pycache__/*.pyc
+restaurante/migrations/*.py
 db.sqlite3
 media
 
