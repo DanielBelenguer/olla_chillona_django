@@ -105,6 +105,7 @@ def list_reserva(request):
 def add_saldo(request):
     if request.method == 'POST':
         saldo = request.POST.get('saldo')
-        request.user.saldo += saldo
+        request.user.saldo += float(saldo)
         request.user.save()
         return redirect('dashboard')
+    return render(request, "restaurante/add_saldo.html")

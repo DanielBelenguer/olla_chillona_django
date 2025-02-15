@@ -11,5 +11,6 @@ urlpatterns = [
     path("<int:plato_id>/", views.detail, name="detail"),
     path("edita_plato/<int:plato_id>/", views.edita_plato, name="edita_plato"),
     path("add_descuento/", views.add_descuento, name="add_descuento"),
-    path("add_reserva/", views.add_reserva, name="add_reserva")
+    path("add_reserva/", views.add_reserva, name="add_reserva"),
+    path("add_saldo", views.add_saldo, name="add_saldo")
 ]
