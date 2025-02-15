@@ -16,7 +16,7 @@ class UsuarioPersonalizado(AbstractUser):
     nombre = models.CharField(max_length=25)
     apellidos = models.CharField(max_length=50)
     num_telefono = models.IntegerField()
-    saldo = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    saldo = models.IntegerField(default=0)
     email = models.EmailField()
     password = models.CharField(max_length=50)
     rol = models.CharField(max_length=10, choices=ROLES, default=CLIENTE)
