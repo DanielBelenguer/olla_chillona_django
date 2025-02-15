@@ -4,6 +4,7 @@
 *.pyc
 restaurante/__pycache__/*.pyc
 restaurante/migrations/*.py
+restaurante/migrations/__pycache__/*.pyc
 db.sqlite3
 media
 
