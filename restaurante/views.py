@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import UsuarioPersonalizado,Plato,Descuento,Reserva
+from .models import UsuarioPersonalizado,Plato,Descuento,Reserva,Menu
 from django.contrib.auth.hashers import make_password
 
 
@@ -109,3 +109,20 @@ def add_saldo(request):
         request.user.save()
         return redirect('dashboard')
     return render(request, "restaurante/add_saldo.html")
+
+
+def add_menu(request):
+    l_platos = Plato.objects.all()
+    if request.method == "POST":
+        nombre = request.POST.get('nombre')
+        precio = request.POST.get('precio')
+        platos_ids = request.POST.getlist('platos')
+        menu = Menu.objects.create(nombre=nombre, precio=precio)
+        menu.platos.set(Plato.objects.filter(id__in=platos_ids))
+        #return redirect('dashboard')
+    return render(request, 'restaurante/add_menu.html', {'l_platos': l_platos})
+
+
+def list_menus(request):
+    l_menus = Menu.objects.all()
+    return render(request, "restaurante/list_menus.html", {"l_menus": l_menus})

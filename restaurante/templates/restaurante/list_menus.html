@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar los Menus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    {% load static %}
+</head>
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div class="contenedor_todos_platos" style="width: 40%;">
+        <h1>Todos los menus:</h1>
+        <div style="display: flex; justify-content: center;">
+            <span class="material-symbols-outlined">mode_night</span>
+                <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
+            <span class="material-symbols-outlined">light_mode</span>
+        </div>
+        {% if l_menus %}
+    <ul>
+    {% for menu in l_menus %}
+        <li>{{ menu.nombre }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay menus</p>
+    {% endif %}
+    </div>
+    <script src="{% static 'restaurante/app.js' %}"></script>
+</body>
+</html>
