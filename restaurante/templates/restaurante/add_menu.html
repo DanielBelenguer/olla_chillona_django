@@ -24,10 +24,13 @@
             {{ plato.nombre }} ({{ plato.precio }}€)
             <br>
             {% endfor %}
+            <br>
             <button type="submit">Crear Menú</button>
         </form>
         <a href="{% url 'list_menus' %}">Ver todos los menús</a>
+        <br>
+        <br>
+        <button id="volveratras"><a style="color: white; text-decoration: none;" href="{% url 'dashboard'%}">Volver Atras</a></button>
     </div>
 </body>
-
 </html>

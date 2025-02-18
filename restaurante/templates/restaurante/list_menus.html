@@ -25,6 +25,8 @@
     {% else %}
     <p>No hay menus</p>
     {% endif %}
+
+    <button id="volveratras"><a style="color: white; text-decoration: none;" href="{% url 'add_menu'%}">Volver Atras</a></button>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
 </body>

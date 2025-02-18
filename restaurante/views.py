@@ -119,7 +119,6 @@ def add_menu(request):
         platos_ids = request.POST.getlist('platos')
         menu = Menu.objects.create(nombre=nombre, precio=precio)
         menu.platos.set(Plato.objects.filter(id__in=platos_ids))
-        #return redirect('dashboard')
     return render(request, 'restaurante/add_menu.html', {'l_platos': l_platos})
 
 

@@ -35,8 +35,7 @@
             {% if l_reservas %}
             <ul>
                 {% for reserva in l_reservas %}
-                <li> Fecha de la reserva: {{ reserva.fecha }} Hora: {{ reserva.hora }} Comensales: {{
-                    reserva.num_personas }}</li>
+                <li> Fecha de la reserva: {{ reserva.fecha }} Hora: {{ reserva.hora }} Comensales: {{ reserva.num_personas }}</li>
                 {% endfor %}
             </ul>
             {% else %}
