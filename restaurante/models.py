@@ -54,6 +54,5 @@ class Menu(models.Model):
     platos = models.ManyToManyField(Plato)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     
-    
     def __str__(self):
         return self.nombre
