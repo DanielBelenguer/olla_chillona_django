@@ -10,14 +10,14 @@
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
-        <form method="post">
-            {% csrf_token %}
-            <h2>Editar Plato</h2>
+        <h2>Editar Plato</h2>
             <div style="display: flex; justify-content: center;">
                 <span class="material-symbols-outlined">mode_night</span>
                     <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
                 <span class="material-symbols-outlined">light_mode</span>
             </div>
+        <form method="post">
+            {% csrf_token %}
             <input type="text" placeholder="Nombre del plato" id="nombre" name="nombre" value="{{ plato.nombre }}" required>
             <label for="categoria">Categoría</label>
             <select name="categoria">
@@ -32,5 +32,12 @@
         </form>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
+    <script>
+        // Este script se encarga de reemplazar las comas por puntos en el campo de precio
+        document.addEventListener('submit', function(event) {
+            var precioField = document.getElementById('precio');
+            precioField.value = precioField.value.replace(',', '.');
+        });
+    </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import UsuarioPersonalizado,Plato,Descuento,Reserva,Menu
 from django.contrib.auth.hashers import make_password
+from .forms import PlatoForm
 
 
 def login_view(request):
@@ -49,15 +50,16 @@ def list_platos(request):
     l_platos = Plato.objects.all()
     return render(request, "restaurante/list_platos.html", {"l_platos": l_platos})
 
+
 def add_plato(request):
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        categoria = request.POST.get('categoria')
-        descripcion = request.POST.get('descripcion')
-        precio = request.POST.get('precio')
-        Plato.objects.create(nombre=nombre, categoria=categoria, descripcion=descripcion, precio=precio)
-        return redirect('dashboard')
-    return render(request, "restaurante/add_plato.html")
+        form = PlatoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = PlatoForm()
+    return render(request, "restaurante/add_plato.html", {'form': form})
 
     
 def detail(request, plato_id):

@@ -1,6 +1,8 @@
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
+
 
 urlpatterns = [
     path("", views.login_view, name="login"),
@@ -16,3 +18,6 @@ urlpatterns = [
     path("add_menu/", views.add_menu, name="add_menu"),
     path("list_menus/", views.list_menus, name="list_menus")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

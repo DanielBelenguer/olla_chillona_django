@@ -17,6 +17,11 @@
         </div>
         {% if plato %}
             <h2>Nombre: {{ plato.nombre }}</h2>
+            {% if plato.imagen %}
+                <img src="{{ plato.imagen.url }}" alt="{{ plato.nombre }}" style="width: 100%; height: auto;">
+            {% else %}
+                <p>No hay imagen disponible para este plato.</p>
+            {% endif %}
             <p>Descripción: {{ plato.descripcion }}</p>
             <p>Categoría: {{ plato.categoria }}</p>
             <p>Precio: {{ plato.precio }}</p>

@@ -37,17 +37,27 @@ class Plato(models.Model):
     descripcion = models.TextField()
     categoria = models.CharField(max_length=50, choices=CATEGORIA)
     precio = models.DecimalField(max_digits=5, decimal_places=2)
+    imagen = models.ImageField(upload_to='img_platos/' , null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
 
 
 class Descuento(models.Model):
     nombre = models.CharField(max_length=50)
     porcent = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.nombre
+
 class Reserva(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
     num_personas = models.IntegerField()
     usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.fecha
 
 class Menu(models.Model):
     nombre = models.CharField(max_length=200)
