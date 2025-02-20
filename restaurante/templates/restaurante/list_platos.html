@@ -19,7 +19,7 @@
         {% if l_platos %}
     <ul>
     {% for plato in l_platos %}
-        <li><a href="/restaurante/{{ plato.id }}/">{{ plato.nombre }}</a></li>
+        <li><a href="/restaurante/ver_plato/{{ plato.id }}/">{{ plato.nombre }}</a></li>
     {% endfor %}
     </ul>
     {% else %}

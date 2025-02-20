@@ -32,12 +32,5 @@
         </form>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
-    <script>
-        // Este script se encarga de reemplazar las comas por puntos en el campo de precio
-        document.addEventListener('submit', function(event) {
-            var precioField = document.getElementById('precio');
-            precioField.value = precioField.value.replace(',', '.');
-        });
-    </script>
 </body>
 </html>

@@ -66,3 +66,12 @@ class Menu(models.Model):
     
     def __str__(self):
         return self.nombre
+    
+
+class Servicio(models.Model):
+    pagado = models.BooleanField(default=False)
+    finalizado = models.BooleanField(default=False)
+    reserva = models.BooleanField(default=False)
+    usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    plato = models.ForeignKey(Plato, on_delete=models.CASCADE)
