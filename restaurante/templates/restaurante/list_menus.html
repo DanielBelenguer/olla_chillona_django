@@ -17,14 +17,14 @@
             <span class="material-symbols-outlined">light_mode</span>
         </div>
         {% if l_menus %}
-    <ul>
-    {% for menu in l_menus %}
-        <li>{{ menu.nombre }}</li>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p>No hay menus</p>
-    {% endif %}
+            <ul>
+                {% for menu in l_menus %}
+                    <li>{{ menu.nombre }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <p>No hay menus</p>
+        {% endif %}
 
     <button id="volveratras"><a style="color: white; text-decoration: none;" href="{% url 'add_menu'%}">Volver Atras</a></button>
     </div>

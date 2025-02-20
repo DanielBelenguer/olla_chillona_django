@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard del camarero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    {% load static %}
+</head>
+
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+    <div style="width: 40%;">
+        <h2>Camarero</h2>
+        <div style="display: flex; justify-content: center;">
+            <span class="material-symbols-outlined">mode_night</span>
+            <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
+            <span class="material-symbols-outlined">light_mode</span>
+        </div>
+        <br>
+                
+        <div style="display: flex; justify-content: center;">
+            <form method="post" style="width: 100%;">
+                {% csrf_token %}
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <div style="width: 45%;">
+                        <h3>Seleccionar Platos:</h3>
+                        {% if l_platos %}
+                        {% for plato in l_platos %}
+                        <input type="checkbox" name="platos" value="{{ plato.id }}">
+                        {{ plato.nombre }} ({{ plato.precio }}€)
+                        <br>
+                        {% endfor %}
+                        {% else %}
+                        <p>No hay platos</p>
+                        {% endif %}
+                    </div>
+                    <div style="width: 45%;">
+                        <h3>Selecciona Menus:</h3>
+                        {% if l_menus %}
+                        <ul>
+                            {% for menu in l_menus %}
+                            <input type="checkbox" name="menus" value="{{ menu.id }}">
+                            {{ menu.nombre }} ({{ menu.precio }}€)
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No hay menus</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+                <button type="submit">Crear Servicio</button>
+            </form>
+        </div>
+        
+        <script src="{% static 'restaurante/app.js' %}"></script>
+</body>
+
+</html>

@@ -143,14 +143,20 @@ def list_menus(request):
     return render(request, "restaurante/list_menus.html", {"l_menus": l_menus})
 
 
-@login_required
 def add_servicio(request, usuario_id):
-    usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
+    if usuario_id == 0:
+        usuario = request.user
+    else:
+        usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
+    
+    l_platos = Plato.objects.all()
+    l_menus = Menu.objects.all()
+
     if request.method == 'POST':
-        menu_id = request.POST.get('menu')
-        plato_id = request.POST.get('plato')
+        menu_id = request.POST.getlist('menu')
+        plato_id = request.POST.getlist('plato')
         menu = Menu.objects.get(id=menu_id)
         plato = Plato.objects.get(id=plato_id)
         Servicio.objects.create(usuario=usuario, menu=menu, plato=plato)
         return redirect('dashboard')
-    return render(request, "restaurante/add_servicio.html", {'usuario': usuario})
+    return render(request, "restaurante/add_servicio.html", {'usuario': usuario, 'l_platos': l_platos, 'l_menus': l_menus})
