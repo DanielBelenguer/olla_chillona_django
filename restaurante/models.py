@@ -73,5 +73,5 @@ class Servicio(models.Model):
     finalizado = models.BooleanField(default=False)
     reserva = models.BooleanField(default=False)
     usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    plato = models.ForeignKey(Plato, on_delete=models.CASCADE)
+    menus = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    platos = models.ForeignKey(Plato, on_delete=models.CASCADE)

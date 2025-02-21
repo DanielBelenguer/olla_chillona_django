@@ -51,6 +51,15 @@
                     </div>
                 </div>
                 <br>
+                <h3>Seleccionar Cliente:</h3>
+                
+                {% if l_clientes %}
+                    <select name="cliente">
+                    {% for cliente in l_clientes %}
+                    <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
                 <button type="submit">Crear Servicio</button>
             </form>
         </div>

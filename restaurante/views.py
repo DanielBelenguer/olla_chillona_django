@@ -31,7 +31,8 @@ def dashboard(request):
         return render(request, 'restaurante/dashboard_cocinero.html')
     if request.user.rol == 'camarero':
         return render(request, 'restaurante/dashboard_camarero.html', {"l_reservas": Reserva.objects.all()})
-    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": Reserva.objects.all(), "saldo": request.user.saldo})
+    reservas_cliente = Reserva.objects.filter(usuario=request.user)
+    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": reservas_cliente, "saldo": request.user.saldo})
 
 @login_required
 def register_view(request):
@@ -142,15 +143,16 @@ def list_menus(request):
     l_menus = Menu.objects.all()
     return render(request, "restaurante/list_menus.html", {"l_menus": l_menus})
 
-
+@login_required
 def add_servicio(request, usuario_id):
-    if usuario_id == 0:
-        usuario = request.user
-    else:
-        usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
-    
+    l_clientes = []
     l_platos = Plato.objects.all()
     l_menus = Menu.objects.all()
+
+    if usuario_id == 0:
+        l_clientes = UsuarioPersonalizado.objects.filter(rol='cliente')
+    else:
+        usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
 
     if request.method == 'POST':
         menu_id = request.POST.getlist('menu')
@@ -159,4 +161,4 @@ def add_servicio(request, usuario_id):
         plato = Plato.objects.get(id=plato_id)
         Servicio.objects.create(usuario=usuario, menu=menu, plato=plato)
         return redirect('dashboard')
-    return render(request, "restaurante/add_servicio.html", {'usuario': usuario, 'l_platos': l_platos, 'l_menus': l_menus})
+    return render(request, "restaurante/add_servicio.html", {'l_platos': l_platos, 'l_menus': l_menus, 'l_clientes': l_clientes})
