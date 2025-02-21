@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import UsuarioPersonalizado,Plato,Descuento,Reserva,Menu,Servicio
 from django.contrib.auth.hashers import make_password
 from .forms import PlatoForm
@@ -26,15 +27,20 @@ def logout_view(request):
 @login_required
 def dashboard(request):
     if request.user.rol == 'jefe':
-        return render(request, 'restaurante/dashboard_jefe.html',{"l_descuentos":Descuento.objects.all()})
+        return render(request, 'restaurante/dashboard_jefe.html', {"l_descuentos": Descuento.objects.all()})
     if request.user.rol == 'cocinero':
         return render(request, 'restaurante/dashboard_cocinero.html')
     if request.user.rol == 'camarero':
         return render(request, 'restaurante/dashboard_camarero.html', {"l_reservas": Reserva.objects.all()})
     reservas_cliente = Reserva.objects.filter(usuario=request.user)
-    return render(request, 'restaurante/dashboard_cliente.html',{"l_reservas": reservas_cliente, "saldo": request.user.saldo})
+    servicios_finalizados = Servicio.objects.filter(usuario=request.user, finalizado=True, pagado=False)
+    return render(request, 'restaurante/dashboard_cliente.html', {
+        "l_reservas": reservas_cliente,
+        "saldo": request.user.saldo,
+        "l_servicios": servicios_finalizados
+    })
 
-@login_required
+
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -148,17 +154,64 @@ def add_servicio(request, usuario_id):
     l_clientes = []
     l_platos = Plato.objects.all()
     l_menus = Menu.objects.all()
+    usuario = None
 
     if usuario_id == 0:
         l_clientes = UsuarioPersonalizado.objects.filter(rol='cliente')
+        reserva = False
     else:
-        usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
+        try:
+            usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
+            reserva = True
+        except UsuarioPersonalizado.DoesNotExist:
+            usuario = None
+            reserva = False
 
     if request.method == 'POST':
-        menu_id = request.POST.getlist('menu')
-        plato_id = request.POST.getlist('plato')
-        menu = Menu.objects.get(id=menu_id)
-        plato = Plato.objects.get(id=plato_id)
-        Servicio.objects.create(usuario=usuario, menu=menu, plato=plato)
-        return redirect('dashboard')
+        menus_id = request.POST.getlist('menus')
+        platos_id = request.POST.getlist('platos')
+        if menus_id and platos_id:
+            try:
+                menu = Menu.objects.get(id=menus_id[0])
+                plato = Plato.objects.get(id=platos_id[0])
+                precio_total = menu.precio + plato.precio
+                finalizado = True
+                Servicio.objects.create(usuario=usuario, menu=menu, plato=plato, precio_total=precio_total, reserva=reserva, finalizado=finalizado)
+                return redirect('dashboard')
+            except (Menu.DoesNotExist, Plato.DoesNotExist):
+                error_message = "El menú o plato seleccionado no existe."
+        else:
+            error_message = "Debe seleccionar al menos un menú y un plato."
+        return render(request, "restaurante/add_servicio.html", {
+            'l_platos': l_platos,
+            'l_menus': l_menus,
+            'l_clientes': l_clientes,
+            'error': error_message
+        })
     return render(request, "restaurante/add_servicio.html", {'l_platos': l_platos, 'l_menus': l_menus, 'l_clientes': l_clientes})
+
+@login_required
+def pagar_servicio(request, servicio_id):
+    servicio = Servicio.objects.get(id=servicio_id)
+    if request.method == 'POST':
+        if request.user.saldo >= servicio.precio_total:
+            request.user.saldo -= servicio.precio_total
+            servicio.pagado = True
+            request.user.save()
+            servicio.save()
+            messages.success(request, 'Servicio pagado con éxito.')
+        else:
+            precio_con_tarjeta = servicio.precio_total * 1.07
+            request.user.saldo = 0
+            servicio.pagado = True
+            request.user.save()
+            servicio.save()
+            messages.success(request, f'Saldo insuficiente. Servicio pagado con tarjeta con un 7% de recargo: {precio_con_tarjeta:.2f}€.')
+        return redirect('dashboard')
+    return render(request, 'restaurante/pagar_servicio.html', {"servicio": servicio})
+
+
+@login_required
+def historial_servicios(request):
+    servicios = Servicio.objects.filter(usuario=request.user, pagado=True)
+    return render(request, 'restaurante/historial_servicios.html', {"servicios": servicios})

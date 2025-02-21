@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login de la olla chillona</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     {% load static %}
 </head>
-<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
-    <div style="width: 40%;">
-        <form method="post">
-            <h2>Iniciar sesión</h2>
-            <div style="display: flex; justify-content: center;">
-                <span class="material-symbols-outlined">mode_night</span>
+
+<body>
+    <nav>
+        <ul>
+            <li style="padding-left: 25px;"><strong>La Olla Chillona</strong></li>
+        </ul>
+        <ul>
+            <li><button><a style="color: white; text-decoration: none;" href="{% url 'login_view'%}">Iniciar sesión</a></button></li>
+    </nav>
+    <div style="display: flex; justify-content: center; height: 100vh; margin: 0;" >
+        <div style="width: 40%;">
+            <form method="post">
+                <div style="display: flex; justify-content: center;">
+                    <span class="material-symbols-outlined">mode_night</span>
                     <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
-                <span class="material-symbols-outlined">light_mode</span>
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <img src="{% static 'media/img_web/guindilla.png' %}" alt="">
-            </div>
-            {% csrf_token %}
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="username" name="username">
-    
-            <label for="pass">Contraseña:</label>
-            <input type="password" id="password" name="password">
-    
-            <button id="ingresa" type="submit">Ingresar</button>
-            <button id="registro"><a style="color: white; text-decoration: none;" href="{% url 'register_view'%}">Registrate</a></button>
-    
-        </form>
-        {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+                    <span class="material-symbols-outlined">light_mode</span>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <img src="{% static 'media/img_web/guindilla.png' %}" style="width: 250px;" alt="">
+                </div>
+                {% csrf_token %}
+                <h3>Iniciar sesión</h3>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="username" name="username">
+
+                <label for="pass">Contraseña:</label>
+                <input type="password" id="password" name="password">
+
+                <button id="ingresa" type="submit">Ingresar</button>
+                <button id="registro"><a style="color: white; text-decoration: none;" href="{% url 'register_view'%}">Registrate</a></button>
+
+            </form>
+            {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+        </div>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>
 </body>
+
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Servicios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    {% load static %}
+</head>
+<body>
+    <div style="width: 40%; margin: auto;">
+        <h2>Historial de Servicios</h2>
+        {% if servicios %}
+        <ul>
+            {% for servicio in servicios %}
+            <li>
+                Fecha: {{ servicio.fecha }}<br>
+                Camarero: {{ servicio.usuario }}<br>
+                Productos Consumidos: {{ servicio.menu.nombre }} y {{ servicio.plato.nombre }}<br>
+                Precio Total: {{ servicio.precio_total }}€
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No hay servicios en el historial.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

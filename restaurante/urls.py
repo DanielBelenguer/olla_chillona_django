@@ -2,10 +2,11 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.urls import include
 
 
 urlpatterns = [
-    path("", views.login_view, name="login"),
+    path("", views.login_view, name="login_view"),
     path("registro/", views.register_view, name="register_view"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path ("list_platos/" , views.list_platos, name="list_platos"),
@@ -18,6 +19,8 @@ urlpatterns = [
     path("add_menu/", views.add_menu, name="add_menu"),
     path("list_menus/", views.list_menus, name="list_menus"),
     path("add_servicio/<int:usuario_id>/", views.add_servicio, name="add_servicio"),
+    path("pagar_servicio/<int:servicio_id>/", views.pagar_servicio, name="pagar_servicio"),
+    path("historial_servicios/", views.historial_servicios, name="historial_servicios"),
 ]
 
 if settings.DEBUG:

@@ -39,21 +39,21 @@
                     <div style="width: 45%;">
                         <h3>Selecciona Menus:</h3>
                         {% if l_menus %}
-                        <ul>
-                            {% for menu in l_menus %}
-                            <input type="checkbox" name="menus" value="{{ menu.id }}">
-                            {{ menu.nombre }} ({{ menu.precio }}€)
-                            {% endfor %}
-                        </ul>
+                        {% for menu in l_menus %}
+                        <input type="checkbox" name="menus" value="{{ menu.id }}">
+                        {{ menu.nombre }} ({{ menu.precio }}€)
+                        <br>
+                        {% endfor %}
                         {% else %}
                         <p>No hay menus</p>
                         {% endif %}
                     </div>
                 </div>
                 <br>
-                <h3>Seleccionar Cliente:</h3>
+                
                 
                 {% if l_clientes %}
+                <h3>Seleccionar Cliente:</h3>
                     <select name="cliente">
                     {% for cliente in l_clientes %}
                     <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
