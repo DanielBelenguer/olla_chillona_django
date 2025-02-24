@@ -14,8 +14,6 @@
         <ul>
             {% for servicio in servicios %}
             <li>
-                Fecha: {{ servicio.fecha }}<br>
-                Camarero: {{ servicio.usuario }}<br>
                 Productos Consumidos: {{ servicio.menu.nombre }} y {{ servicio.plato.nombre }}<br>
                 Precio Total: {{ servicio.precio_total }}€
             </li>

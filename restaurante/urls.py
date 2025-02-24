@@ -1,8 +1,7 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from . import views
 from django.urls import include
+
 
 
 urlpatterns = [
@@ -22,6 +21,3 @@ urlpatterns = [
     path("pagar_servicio/<int:servicio_id>/", views.pagar_servicio, name="pagar_servicio"),
     path("historial_servicios/", views.historial_servicios, name="historial_servicios"),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

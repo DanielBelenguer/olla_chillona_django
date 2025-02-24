@@ -22,8 +22,8 @@
             <br>
             <br>
             <form action="{% url 'add_plato' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
                 <h2>Añadir Plato</h2>
+                {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Crear Plato</button>
             </form>

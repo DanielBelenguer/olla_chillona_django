@@ -73,6 +73,9 @@ class Servicio(models.Model):
     finalizado = models.BooleanField(default=False)
     reserva = models.BooleanField(default=False)
     usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    plato = models.ForeignKey(Plato, on_delete=models.CASCADE)
+    menus = models.ManyToManyField(Menu)
+    platos = models.ManyToManyField(Plato)
     precio_total = models.DecimalField(max_digits=6, decimal_places=2,default=0)
+
+    def __str__(self):
+        return self.usuario.username

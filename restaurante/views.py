@@ -33,7 +33,7 @@ def dashboard(request):
     if request.user.rol == 'camarero':
         return render(request, 'restaurante/dashboard_camarero.html', {"l_reservas": Reserva.objects.all()})
     reservas_cliente = Reserva.objects.filter(usuario=request.user)
-    servicios_finalizados = Servicio.objects.filter(usuario=request.user, finalizado=True, pagado=False)
+    servicios_finalizados = Servicio.objects.filter(usuario=request.user)
     return render(request, 'restaurante/dashboard_cliente.html', {
         "l_reservas": reservas_cliente,
         "saldo": request.user.saldo,
@@ -160,34 +160,28 @@ def add_servicio(request, usuario_id):
         l_clientes = UsuarioPersonalizado.objects.filter(rol='cliente')
         reserva = False
     else:
-        try:
-            usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
-            reserva = True
-        except UsuarioPersonalizado.DoesNotExist:
-            usuario = None
-            reserva = False
+        usuario = UsuarioPersonalizado.objects.get(pk=usuario_id)
+        reserva = True
 
     if request.method == 'POST':
         menus_id = request.POST.getlist('menus')
         platos_id = request.POST.getlist('platos')
-        if menus_id and platos_id:
-            try:
-                menu = Menu.objects.get(id=menus_id[0])
-                plato = Plato.objects.get(id=platos_id[0])
-                precio_total = menu.precio + plato.precio
-                finalizado = True
-                Servicio.objects.create(usuario=usuario, menu=menu, plato=plato, precio_total=precio_total, reserva=reserva, finalizado=finalizado)
-                return redirect('dashboard')
-            except (Menu.DoesNotExist, Plato.DoesNotExist):
-                error_message = "El menú o plato seleccionado no existe."
-        else:
-            error_message = "Debe seleccionar al menos un menú y un plato."
-        return render(request, "restaurante/add_servicio.html", {
-            'l_platos': l_platos,
-            'l_menus': l_menus,
-            'l_clientes': l_clientes,
-            'error': error_message
-        })
+            
+        serv = Servicio.objects.create(usuario=usuario)
+        serv.platos.set(Plato.objects.filter(id__in=platos_id))
+        serv.menus.set(Menu.objects.filter(id__in=menus_id))            
+        serv.finalizado = True
+        serv.save()
+        total_servicio = 0
+        for plato in serv.platos.all():
+            total_servicio += plato.precio
+        for menu in serv.menus.all():
+            total_servicio += menu.precio
+        serv.precio_total = total_servicio
+        serv.save()
+
+        return redirect('dashboard')
+        
     return render(request, "restaurante/add_servicio.html", {'l_platos': l_platos, 'l_menus': l_menus, 'l_clientes': l_clientes})
 
 @login_required
@@ -206,7 +200,6 @@ def pagar_servicio(request, servicio_id):
             servicio.pagado = True
             request.user.save()
             servicio.save()
-            messages.success(request, f'Saldo insuficiente. Servicio pagado con tarjeta con un 7% de recargo: {precio_con_tarjeta:.2f}€.')
         return redirect('dashboard')
     return render(request, 'restaurante/pagar_servicio.html', {"servicio": servicio})
 

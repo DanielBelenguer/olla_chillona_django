@@ -51,18 +51,19 @@
         {% if l_servicios %}
         <ul>
             {% for servicio in l_servicios %}
+            {% if not servicio.pagado %}
             <li>Servicio a pagar: ({{ servicio.precio_total }}€)
                 <form action="{% url 'pagar_servicio' servicio.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Pagar</button>
                 </form>
             </li>
+            {% endif %}
             {% endfor %}
         </ul>
         {% else %}
         <p>No hay servicios</p>
         {% endif %}
-        <hr>
         <a href="{% url 'historial_servicios' %}">Ver historial</a>
     </div>
     <script src="{% static 'restaurante/app.js' %}"></script>

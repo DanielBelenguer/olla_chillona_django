@@ -16,6 +16,7 @@
             <span class="material-symbols-outlined">light_mode</span>
         </div>
         {% if plato %}
+            {% load static %}
             <h2>Nombre: {{ plato.nombre }}</h2>
             {% if plato.imagen %}
                 <img src="{{ plato.imagen.url }}" alt="{{ plato.nombre }}" style="width: 100%; height: auto;">
