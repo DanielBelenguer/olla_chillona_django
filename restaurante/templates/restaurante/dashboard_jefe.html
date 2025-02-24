@@ -10,7 +10,14 @@
 </head>
 <body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
     <div style="width: 40%;">
-        <h2>Esto es el dashboard del jefe.</h2>
+        <nav>
+            <ul>
+                <li style="padding-left: 25px;"><strong>La Olla Chillona</strong></li>
+            </ul>
+            <ul>
+                <li><button><a style="color: white; text-decoration: none;" href="{% url 'login_view'%}">Cerrar sesión</a></button></li>
+        </nav>
+        <h2>Jefe</h2>
         <div style="display: flex; justify-content: center;">
             <span class="material-symbols-outlined">mode_night</span>
                 <input name="terms" id="tema" type="checkbox" role="switch" style="margin-top: 2px;" />
