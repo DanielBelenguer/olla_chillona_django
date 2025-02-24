@@ -104,11 +104,11 @@ Algunas capturas de las diferentes pantallas:
 
 ## Login {#login}
 
-<img src="imagenes_documentacion/login_oscuro.png"  alt="Portada de La olla Chillona">
+<img src="imagenes_documentacion/login_oscuro.png"  alt="Login oscuro">
 
 Tenemos la funcionalidad para cambiar el tema de la aplicación mediante el selector de arriba del todo.
 
-<img src="imagenes_documentacion/login_claro.png"  alt="Portada de La olla Chillona">
+<img src="imagenes_documentacion/login_claro.png"  alt="Login claro">
 
 # **2\. Requisitos e instalación** {#2.-requisitos-e-instalación}
 
@@ -138,7 +138,8 @@ python manage.py runserver
 
 # **3\. Estructura del Proyecto** {#3.-estructura-del-proyecto}
 
-![][image4]
+<img src="imagenes_documentacion/estructura.png"  alt="Estructura del proyecto">
+
 
 # **4\. Modelos (Base de Datos)** {#4.-modelos-(base-de-datos)}
 
